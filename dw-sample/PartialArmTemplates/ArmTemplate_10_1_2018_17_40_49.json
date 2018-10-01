@@ -6,42 +6,6 @@
 			"type": "string",
 			"metadata": "Data Factory Name",
 			"defaultValue": "dw-sample"
-		},
-		"incoming_data_connectionString": {
-			"type": "secureString",
-			"metadata": "Secure string for 'connectionString' of 'incoming_data'"
-		},
-		"incoming_data_properties_typeProperties_fileName": {
-			"type": "string",
-			"defaultValue": ""
-		},
-		"incoming_data_properties_typeProperties_folderPath": {
-			"type": "string",
-			"defaultValue": "incoming-data"
-		},
-		"staging_properties_typeProperties_fileName": {
-			"type": "string",
-			"defaultValue": "@pipeline().RunId"
-		},
-		"staging_properties_typeProperties_folderPath": {
-			"type": "string",
-			"defaultValue": "@utcnow()"
-		},
-		"staging_properties_typeProperties_dataLakeStoreUri": {
-			"type": "string",
-			"defaultValue": "https://staging.azuredatalakestore.net/webhdfs/v1"
-		},
-		"staging_properties_typeProperties_tenant": {
-			"type": "string",
-			"defaultValue": "8fc9820f-c46f-415b-880a-01c3e6851984"
-		},
-		"staging_properties_typeProperties_subscriptionId": {
-			"type": "string",
-			"defaultValue": "d50c0a0d-90ce-45cc-97cc-46ef15d64304"
-		},
-		"staging_properties_typeProperties_resourceGroupName": {
-			"type": "string",
-			"defaultValue": "dw-sample-rg"
 		}
 	},
 	"variables": {
@@ -57,7 +21,6 @@
 					{
 						"name": "convert_to_paraquet",
 						"type": "Copy",
-						"dependsOn": [],
 						"policy": {
 							"timeout": "7.00:00:00",
 							"retry": 0,
@@ -65,7 +28,6 @@
 							"secureOutput": false,
 							"secureInput": false
 						},
-						"userProperties": [],
 						"typeProperties": {
 							"source": {
 								"type": "BlobSource",
@@ -81,20 +43,17 @@
 						"inputs": [
 							{
 								"referenceName": "incoming_data",
-								"type": "DatasetReference",
-								"parameters": {}
+								"type": "DatasetReference"
 							}
 						],
 						"outputs": [
 							{
 								"referenceName": "staging",
-								"type": "DatasetReference",
-								"parameters": {}
+								"type": "DatasetReference"
 							}
 						]
 					}
-				],
-				"annotations": []
+				]
 			},
 			"dependsOn": [
 				"[concat(variables('factoryId'), '/datasets/incoming_data')]",
@@ -110,7 +69,6 @@
 					"referenceName": "incoming_data",
 					"type": "LinkedServiceReference"
 				},
-				"annotations": [],
 				"type": "AzureBlob",
 				"structure": [
 					{
@@ -162,13 +120,10 @@
 						"skipLineCount": 0,
 						"firstRowAsHeader": true
 					},
-					"fileName": "[parameters('incoming_data_properties_typeProperties_fileName')]",
-					"folderPath": "[parameters('incoming_data_properties_typeProperties_folderPath')]"
+					"fileName": "",
+					"folderPath": "incoming-data"
 				}
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/linkedServices/incoming_data')]"
-			]
+			}
 		},
 		{
 			"name": "[concat(parameters('factoryName'), '/staging')]",
@@ -179,54 +134,21 @@
 					"referenceName": "staging",
 					"type": "LinkedServiceReference"
 				},
-				"annotations": [],
 				"type": "AzureDataLakeStoreFile",
 				"typeProperties": {
 					"format": {
 						"type": "ParquetFormat"
 					},
 					"fileName": {
-						"value": "[parameters('staging_properties_typeProperties_fileName')]",
+						"value": "@pipeline().RunId",
 						"type": "Expression"
 					},
 					"folderPath": {
-						"value": "[parameters('staging_properties_typeProperties_folderPath')]",
+						"value": "@utcnow()",
 						"type": "Expression"
 					}
 				}
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/linkedServices/staging')]"
-			]
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/incoming_data')]",
-			"type": "Microsoft.DataFactory/factories/linkedServices",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"annotations": [],
-				"type": "AzureBlobStorage",
-				"typeProperties": {
-					"connectionString": "[parameters('incoming_data_connectionString')]"
-				}
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/staging')]",
-			"type": "Microsoft.DataFactory/factories/linkedServices",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"annotations": [],
-				"type": "AzureDataLakeStore",
-				"typeProperties": {
-					"dataLakeStoreUri": "[parameters('staging_properties_typeProperties_dataLakeStoreUri')]",
-					"tenant": "[parameters('staging_properties_typeProperties_tenant')]",
-					"subscriptionId": "[parameters('staging_properties_typeProperties_subscriptionId')]",
-					"resourceGroupName": "[parameters('staging_properties_typeProperties_resourceGroupName')]"
-				}
-			},
-			"dependsOn": []
+			}
 		}
 	]
 }

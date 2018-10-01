@@ -1,1 +1,36 @@
-{}
+{
+	"$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"factoryName": {
+			"value": "dw-sample"
+		},
+		"incoming_data_connectionString": {
+			"value": ""
+		},
+		"incoming_data_properties_typeProperties_fileName": {
+			"value": ""
+		},
+		"incoming_data_properties_typeProperties_folderPath": {
+			"value": "incoming-data"
+		},
+		"staging_properties_typeProperties_fileName": {
+			"value": "@pipeline().RunId"
+		},
+		"staging_properties_typeProperties_folderPath": {
+			"value": "@utcnow()"
+		},
+		"staging_properties_typeProperties_dataLakeStoreUri": {
+			"value": "https://staging.azuredatalakestore.net/webhdfs/v1"
+		},
+		"staging_properties_typeProperties_tenant": {
+			"value": "8fc9820f-c46f-415b-880a-01c3e6851984"
+		},
+		"staging_properties_typeProperties_subscriptionId": {
+			"value": "d50c0a0d-90ce-45cc-97cc-46ef15d64304"
+		},
+		"staging_properties_typeProperties_resourceGroupName": {
+			"value": "dw-sample-rg"
+		}
+	}
+}
