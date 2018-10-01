@@ -1,5 +1,5 @@
 {
-	"name": "copy_to_staging",
+	"name": "copy",
 	"properties": {
 		"activities": [
 			{
