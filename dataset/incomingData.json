@@ -1,5 +1,5 @@
 {
-	"name": "incoming_data",
+	"name": "incomingData",
 	"properties": {
 		"linkedServiceName": {
 			"referenceName": "incoming_data",
