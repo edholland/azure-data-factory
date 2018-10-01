@@ -11,7 +11,7 @@
 				"type": "ParquetFormat"
 			},
 			"fileName": {
-				"value": "@base64(pipeline().RunId)",
+				"value": "test",
 				"type": "Expression"
 			},
 			"folderPath": {
