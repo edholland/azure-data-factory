@@ -1,0 +1,23 @@
+{
+	"name": "staging",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "staging",
+			"type": "LinkedServiceReference"
+		},
+		"type": "AzureDataLakeStoreFile",
+		"typeProperties": {
+			"format": {
+				"type": "ParquetFormat"
+			},
+			"fileName": {
+				"value": "@pipeline().RunId",
+				"type": "Expression"
+			},
+			"folderPath": {
+				"value": "@utcnow()",
+				"type": "Expression"
+			}
+		}
+	}
+}
