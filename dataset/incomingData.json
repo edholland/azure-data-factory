@@ -5,6 +5,12 @@
 			"referenceName": "incoming_data",
 			"type": "LinkedServiceReference"
 		},
+		"parameters": {
+			"folderName": {
+				"type": "String",
+				"defaultValue": "@{formatDateTime(pipeline().parameters.windowStartTime, 'yyyy/MM/dd')}/"
+			}
+		},
 		"type": "AzureBlob",
 		"structure": [
 			{
@@ -57,7 +63,10 @@
 				"firstRowAsHeader": true
 			},
 			"fileName": "",
-			"folderPath": "incoming-data"
+			"folderPath": {
+				"value": "@dataset().folderName",
+				"type": "Expression"
+			}
 		}
 	}
 }

@@ -12,6 +12,19 @@
 					"secureOutput": false,
 					"secureInput": false
 				},
+				"userProperties": [
+					{
+						"name": "windowStartTime"
+					},
+					{
+						"name": "Source",
+						"value": "@{'<folderName>'}/"
+					},
+					{
+						"name": "Destination",
+						"value": "staging/test"
+					}
+				],
 				"typeProperties": {
 					"source": {
 						"type": "BlobSource",
