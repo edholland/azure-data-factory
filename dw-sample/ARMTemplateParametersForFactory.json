@@ -8,17 +8,17 @@
 		"incoming_data_connectionString": {
 			"value": ""
 		},
-		"incoming_data_properties_typeProperties_fileName": {
+		"incomingData_properties_typeProperties_fileName": {
 			"value": ""
 		},
-		"incoming_data_properties_typeProperties_folderPath": {
+		"incomingData_properties_typeProperties_folderPath": {
 			"value": "incoming-data"
 		},
 		"staging_properties_typeProperties_fileName": {
-			"value": "@pipeline().RunId"
+			"value": "test"
 		},
 		"staging_properties_typeProperties_folderPath": {
-			"value": "@utcnow()"
+			"value": "staging"
 		},
 		"staging_properties_typeProperties_dataLakeStoreUri": {
 			"value": "https://staging.azuredatalakestore.net/webhdfs/v1"
