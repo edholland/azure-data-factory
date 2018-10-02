@@ -1,0 +1,35 @@
+{
+	"$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"factoryName": {
+			"type": "string",
+			"metadata": "Data Factory Name",
+			"defaultValue": "dw-sample"
+		}
+	},
+	"variables": {
+		"factoryId": "[concat('Microsoft.DataFactory/factories/', parameters('factoryName'))]"
+	},
+	"resources": [
+		{
+			"name": "[concat(parameters('factoryName'), '/AzureDataLakeAnalytics1')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"type": "AzureDataLakeAnalytics",
+				"typeProperties": {
+					"accountName": "ehollanddla",
+					"servicePrincipalId": "595ccecf-0bfd-40b1-b16f-2b8f53be1cc8",
+					"servicePrincipalKey": {
+						"type": "SecureString",
+						"value": "**********"
+					},
+					"tenant": "8fc9820f-c46f-415b-880a-01c3e6851984",
+					"subscriptionId": "d50c0a0d-90ce-45cc-97cc-46ef15d64304",
+					"resourceGroupName": "dw-sample-rg"
+				}
+			}
+		}
+	]
+}
