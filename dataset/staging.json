@@ -10,10 +10,6 @@
 			"format": {
 				"type": "ParquetFormat"
 			},
-			"fileName": {
-				"value": "test",
-				"type": "Expression"
-			},
 			"folderPath": {
 				"value": "staging",
 				"type": "Expression"

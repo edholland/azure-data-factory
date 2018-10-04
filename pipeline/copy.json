@@ -17,12 +17,22 @@
 						"type": "FileSystemSource",
 						"recursive": true
 					},
+					"sink": {
+						"type": "AzureDataLakeStoreSink",
+						"copyBehavior": "MergeFiles"
+					},
 					"enableStaging": false,
 					"dataIntegrationUnits": 0
 				},
 				"inputs": [
 					{
 						"referenceName": "s3_data",
+						"type": "DatasetReference"
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "staging",
 						"type": "DatasetReference"
 					}
 				]
