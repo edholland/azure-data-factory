@@ -138,7 +138,7 @@
 				"filePattern": "setOfObjects"
 			},
 			"key": "",
-			"prefix": "{Year}/{Month}/{Day}/{Hour}/",
+			"prefix": "",
 			"bucketName": "public-api-extractor-prod-resultbucket-i6bd2vdbkloh",
 			"partitionedBy": [
 				{
