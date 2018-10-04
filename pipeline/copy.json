@@ -56,7 +56,15 @@
 					"secureInput": false
 				},
 				"typeProperties": {
-					"scriptPath": ""
+					"scriptPath": "t.sql",
+					"scriptLinkedService": {
+						"referenceName": "staging",
+						"type": "LinkedServiceReference"
+					},
+					"parameters": {
+						"InputFile": "@CONCAT('/staging/', pipeline().RunId, '.paraquet')",
+						"OutputFile": "@CONCAT('/datawarehouse/', pipeline().RunId, '.csv')"
+					}
 				},
 				"linkedServiceName": {
 					"referenceName": "AzureDataLakeAnalytics1",
