@@ -10,6 +10,7 @@
 			"format": {
 				"type": "ParquetFormat"
 			},
+			"fileName": "@CONCAT(pipeline().RunId, '.paraquet')",
 			"folderPath": {
 				"value": "staging",
 				"type": "Expression"
