@@ -1,0 +1,173 @@
+{
+	"name": "s3_data",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AmazonS31",
+			"type": "LinkedServiceReference"
+		},
+		"type": "AmazonS3Object",
+		"structure": [
+			{
+				"name": "login",
+				"type": "String"
+			},
+			{
+				"name": "id",
+				"type": "Int64"
+			},
+			{
+				"name": "node_id",
+				"type": "String"
+			},
+			{
+				"name": "avatar_url",
+				"type": "String"
+			},
+			{
+				"name": "gravatar_id",
+				"type": "String"
+			},
+			{
+				"name": "url",
+				"type": "String"
+			},
+			{
+				"name": "html_url",
+				"type": "String"
+			},
+			{
+				"name": "followers_url",
+				"type": "String"
+			},
+			{
+				"name": "following_url",
+				"type": "String"
+			},
+			{
+				"name": "gists_url",
+				"type": "String"
+			},
+			{
+				"name": "starred_url",
+				"type": "String"
+			},
+			{
+				"name": "subscriptions_url",
+				"type": "String"
+			},
+			{
+				"name": "organizations_url",
+				"type": "String"
+			},
+			{
+				"name": "repos_url",
+				"type": "String"
+			},
+			{
+				"name": "events_url",
+				"type": "String"
+			},
+			{
+				"name": "received_events_url",
+				"type": "String"
+			},
+			{
+				"name": "type",
+				"type": "String"
+			},
+			{
+				"name": "site_admin",
+				"type": "Boolean"
+			},
+			{
+				"name": "name",
+				"type": "String"
+			},
+			{
+				"name": "company",
+				"type": "String"
+			},
+			{
+				"name": "blog",
+				"type": "String"
+			},
+			{
+				"name": "location",
+				"type": "String"
+			},
+			{
+				"name": "email",
+				"type": "String"
+			},
+			{
+				"name": "hireable",
+				"type": "String"
+			},
+			{
+				"name": "bio",
+				"type": "String"
+			},
+			{
+				"name": "public_repos",
+				"type": "Int64"
+			},
+			{
+				"name": "public_gists",
+				"type": "Int64"
+			},
+			{
+				"name": "followers",
+				"type": "Int64"
+			},
+			{
+				"name": "following",
+				"type": "Int64"
+			},
+			{
+				"name": "created_at",
+				"type": "String"
+			},
+			{
+				"name": "updated_at",
+				"type": "String"
+			},
+			{
+				"name": "extract_year",
+				"type": "Int64"
+			},
+			{
+				"name": "extract_month",
+				"type": "Int64"
+			},
+			{
+				"name": "extract_day",
+				"type": "Int64"
+			},
+			{
+				"name": "extract_hour",
+				"type": "Int64"
+			},
+			{
+				"name": "extract_minute",
+				"type": "Int64"
+			},
+			{
+				"name": "extract_second",
+				"type": "Int64"
+			},
+			{
+				"name": "extract_timestamp",
+				"type": "Int64"
+			}
+		],
+		"typeProperties": {
+			"format": {
+				"type": "JsonFormat",
+				"filePattern": "setOfObjects"
+			},
+			"key": "",
+			"prefix": "",
+			"bucketName": "public-api-extractor-prod-resultbucket-i6bd2vdbkloh"
+		}
+	}
+}

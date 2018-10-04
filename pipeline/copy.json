@@ -3,7 +3,7 @@
 	"properties": {
 		"activities": [
 			{
-				"name": "convert2paraquet",
+				"name": "copy-from-s3",
 				"type": "Copy",
 				"policy": {
 					"timeout": "7.00:00:00",
@@ -17,22 +17,12 @@
 						"type": "FileSystemSource",
 						"recursive": true
 					},
-					"sink": {
-						"type": "AzureDataLakeStoreSink",
-						"copyBehavior": "MergeFiles"
-					},
 					"enableStaging": false,
 					"dataIntegrationUnits": 0
 				},
 				"inputs": [
 					{
-						"referenceName": "AmazonS3Object1",
-						"type": "DatasetReference"
-					}
-				],
-				"outputs": [
-					{
-						"referenceName": "staging",
+						"referenceName": "s3_data",
 						"type": "DatasetReference"
 					}
 				]
