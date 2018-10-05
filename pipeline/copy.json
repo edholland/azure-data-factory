@@ -56,14 +56,20 @@
 					"secureInput": false
 				},
 				"typeProperties": {
-					"scriptPath": "t.sql",
+					"scriptPath": "load.sql",
 					"scriptLinkedService": {
 						"referenceName": "staging",
 						"type": "LinkedServiceReference"
 					},
 					"parameters": {
-						"InputFile": "@CONCAT('/staging/', pipeline().RunId, '.paraquet')",
-						"OutputFile": "@CONCAT('/datawarehouse/', pipeline().RunId, '.csv')"
+						"InputFile": {
+							"value": "@CONCAT('/staging/', pipeline().RunId, '.paraquet')",
+							"type": "Expression"
+						},
+						"OutputFile": {
+							"value": "@CONCAT('/datawarehouse/', pipeline().RunId, '.csv')",
+							"type": "Expression"
+						}
 					}
 				},
 				"linkedServiceName": {
