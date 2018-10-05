@@ -6,66 +6,6 @@
 			"type": "string",
 			"metadata": "Data Factory Name",
 			"defaultValue": "dw-sample"
-		},
-		"AmazonS31_secretAccessKey": {
-			"type": "secureString",
-			"metadata": "Secure string for 'secretAccessKey' of 'AmazonS31'"
-		},
-		"AzureDataLakeAnalytics1_servicePrincipalKey": {
-			"type": "secureString",
-			"metadata": "Secure string for 'servicePrincipalKey' of 'AzureDataLakeAnalytics1'"
-		},
-		"incoming_data_connectionString": {
-			"type": "secureString",
-			"metadata": "Secure string for 'connectionString' of 'incoming_data'"
-		},
-		"staging_properties_typeProperties_fileName": {
-			"type": "string",
-			"defaultValue": "@CONCAT(pipeline().RunId, '.paraquet')"
-		},
-		"staging_properties_typeProperties_folderPath": {
-			"type": "string",
-			"defaultValue": "staging"
-		},
-		"AmazonS31_properties_typeProperties_accessKeyId": {
-			"type": "string",
-			"defaultValue": "AKIAJ4T2EKPS7HAKOYHQ"
-		},
-		"AzureDataLakeAnalytics1_properties_typeProperties_accountName": {
-			"type": "string",
-			"defaultValue": "ehollanddla"
-		},
-		"AzureDataLakeAnalytics1_properties_typeProperties_servicePrincipalId": {
-			"type": "string",
-			"defaultValue": "595ccecf-0bfd-40b1-b16f-2b8f53be1cc8"
-		},
-		"AzureDataLakeAnalytics1_properties_typeProperties_tenant": {
-			"type": "string",
-			"defaultValue": "8fc9820f-c46f-415b-880a-01c3e6851984"
-		},
-		"AzureDataLakeAnalytics1_properties_typeProperties_subscriptionId": {
-			"type": "string",
-			"defaultValue": "d50c0a0d-90ce-45cc-97cc-46ef15d64304"
-		},
-		"AzureDataLakeAnalytics1_properties_typeProperties_resourceGroupName": {
-			"type": "string",
-			"defaultValue": "dw-sample-rg"
-		},
-		"staging_properties_typeProperties_dataLakeStoreUri": {
-			"type": "string",
-			"defaultValue": "https://staging.azuredatalakestore.net/webhdfs/v1"
-		},
-		"staging_properties_typeProperties_tenant": {
-			"type": "string",
-			"defaultValue": "8fc9820f-c46f-415b-880a-01c3e6851984"
-		},
-		"staging_properties_typeProperties_subscriptionId": {
-			"type": "string",
-			"defaultValue": "d50c0a0d-90ce-45cc-97cc-46ef15d64304"
-		},
-		"staging_properties_typeProperties_resourceGroupName": {
-			"type": "string",
-			"defaultValue": "dw-sample-rg"
 		}
 	},
 	"variables": {
@@ -81,7 +21,6 @@
 					{
 						"name": "copy-from-s3",
 						"type": "Copy",
-						"dependsOn": [],
 						"policy": {
 							"timeout": "7.00:00:00",
 							"retry": 0,
@@ -89,7 +28,6 @@
 							"secureOutput": false,
 							"secureInput": false
 						},
-						"userProperties": [],
 						"typeProperties": {
 							"source": {
 								"type": "FileSystemSource",
@@ -105,15 +43,13 @@
 						"inputs": [
 							{
 								"referenceName": "s3_data",
-								"type": "DatasetReference",
-								"parameters": {}
+								"type": "DatasetReference"
 							}
 						],
 						"outputs": [
 							{
 								"referenceName": "staging",
-								"type": "DatasetReference",
-								"parameters": {}
+								"type": "DatasetReference"
 							}
 						]
 					},
@@ -135,7 +71,6 @@
 							"secureOutput": false,
 							"secureInput": false
 						},
-						"userProperties": [],
 						"typeProperties": {
 							"scriptPath": "t.sql",
 							"scriptLinkedService": {
@@ -158,14 +93,11 @@
 							"type": "LinkedServiceReference"
 						}
 					}
-				],
-				"annotations": []
+				]
 			},
 			"dependsOn": [
 				"[concat(variables('factoryId'), '/datasets/s3_data')]",
-				"[concat(variables('factoryId'), '/datasets/staging')]",
-				"[concat(variables('factoryId'), '/linkedServices/staging')]",
-				"[concat(variables('factoryId'), '/linkedServices/AzureDataLakeAnalytics1')]"
+				"[concat(variables('factoryId'), '/datasets/staging')]"
 			]
 		},
 		{
@@ -177,7 +109,6 @@
 					"referenceName": "AmazonS31",
 					"type": "LinkedServiceReference"
 				},
-				"annotations": [],
 				"type": "AmazonS3Object",
 				"structure": [
 					{
@@ -342,10 +273,7 @@
 					"prefix": "",
 					"bucketName": "public-api-extractor-prod-resultbucket-i6bd2vdbkloh"
 				}
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/linkedServices/AmazonS31')]"
-			]
+			}
 		},
 		{
 			"name": "[concat(parameters('factoryName'), '/staging')]",
@@ -356,92 +284,21 @@
 					"referenceName": "staging",
 					"type": "LinkedServiceReference"
 				},
-				"annotations": [],
 				"type": "AzureDataLakeStoreFile",
 				"typeProperties": {
 					"format": {
 						"type": "ParquetFormat"
 					},
 					"fileName": {
-						"value": "[parameters('staging_properties_typeProperties_fileName')]",
+						"value": "@CONCAT(pipeline().RunId, '.paraquet')",
 						"type": "Expression"
 					},
 					"folderPath": {
-						"value": "[parameters('staging_properties_typeProperties_folderPath')]",
+						"value": "staging",
 						"type": "Expression"
 					}
 				}
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/linkedServices/staging')]"
-			]
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/AmazonS31')]",
-			"type": "Microsoft.DataFactory/factories/linkedServices",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"annotations": [],
-				"type": "AmazonS3",
-				"typeProperties": {
-					"accessKeyId": "[parameters('AmazonS31_properties_typeProperties_accessKeyId')]",
-					"secretAccessKey": {
-						"type": "SecureString",
-						"value": "[parameters('AmazonS31_secretAccessKey')]"
-					}
-				}
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/AzureDataLakeAnalytics1')]",
-			"type": "Microsoft.DataFactory/factories/linkedServices",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"annotations": [],
-				"type": "AzureDataLakeAnalytics",
-				"typeProperties": {
-					"accountName": "[parameters('AzureDataLakeAnalytics1_properties_typeProperties_accountName')]",
-					"servicePrincipalId": "[parameters('AzureDataLakeAnalytics1_properties_typeProperties_servicePrincipalId')]",
-					"servicePrincipalKey": {
-						"type": "SecureString",
-						"value": "[parameters('AzureDataLakeAnalytics1_servicePrincipalKey')]"
-					},
-					"tenant": "[parameters('AzureDataLakeAnalytics1_properties_typeProperties_tenant')]",
-					"subscriptionId": "[parameters('AzureDataLakeAnalytics1_properties_typeProperties_subscriptionId')]",
-					"resourceGroupName": "[parameters('AzureDataLakeAnalytics1_properties_typeProperties_resourceGroupName')]"
-				}
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/incoming_data')]",
-			"type": "Microsoft.DataFactory/factories/linkedServices",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"annotations": [],
-				"type": "AzureBlobStorage",
-				"typeProperties": {
-					"connectionString": "[parameters('incoming_data_connectionString')]"
-				}
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/staging')]",
-			"type": "Microsoft.DataFactory/factories/linkedServices",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"annotations": [],
-				"type": "AzureDataLakeStore",
-				"typeProperties": {
-					"dataLakeStoreUri": "[parameters('staging_properties_typeProperties_dataLakeStoreUri')]",
-					"tenant": "[parameters('staging_properties_typeProperties_tenant')]",
-					"subscriptionId": "[parameters('staging_properties_typeProperties_subscriptionId')]",
-					"resourceGroupName": "[parameters('staging_properties_typeProperties_resourceGroupName')]"
-				}
-			},
-			"dependsOn": []
+			}
 		}
 	]
 }

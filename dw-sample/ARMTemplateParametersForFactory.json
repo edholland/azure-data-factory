@@ -5,20 +5,38 @@
 		"factoryName": {
 			"value": "dw-sample"
 		},
+		"AmazonS31_secretAccessKey": {
+			"value": ""
+		},
+		"AzureDataLakeAnalytics1_servicePrincipalKey": {
+			"value": ""
+		},
 		"incoming_data_connectionString": {
 			"value": ""
 		},
-		"incomingData_properties_typeProperties_fileName": {
-			"value": ""
-		},
-		"incomingData_properties_typeProperties_folderPath": {
-			"value": "incoming-data"
-		},
 		"staging_properties_typeProperties_fileName": {
-			"value": "test"
+			"value": "@CONCAT(pipeline().RunId, '.paraquet')"
 		},
 		"staging_properties_typeProperties_folderPath": {
 			"value": "staging"
+		},
+		"AmazonS31_properties_typeProperties_accessKeyId": {
+			"value": "AKIAJ4T2EKPS7HAKOYHQ"
+		},
+		"AzureDataLakeAnalytics1_properties_typeProperties_accountName": {
+			"value": "ehollanddla"
+		},
+		"AzureDataLakeAnalytics1_properties_typeProperties_servicePrincipalId": {
+			"value": "595ccecf-0bfd-40b1-b16f-2b8f53be1cc8"
+		},
+		"AzureDataLakeAnalytics1_properties_typeProperties_tenant": {
+			"value": "8fc9820f-c46f-415b-880a-01c3e6851984"
+		},
+		"AzureDataLakeAnalytics1_properties_typeProperties_subscriptionId": {
+			"value": "d50c0a0d-90ce-45cc-97cc-46ef15d64304"
+		},
+		"AzureDataLakeAnalytics1_properties_typeProperties_resourceGroupName": {
+			"value": "dw-sample-rg"
 		},
 		"staging_properties_typeProperties_dataLakeStoreUri": {
 			"value": "https://staging.azuredatalakestore.net/webhdfs/v1"
