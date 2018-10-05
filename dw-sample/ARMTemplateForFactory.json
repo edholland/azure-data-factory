@@ -137,7 +137,7 @@
 						},
 						"userProperties": [],
 						"typeProperties": {
-							"scriptPath": "t.sql",
+							"scriptPath": "load.sql",
 							"scriptLinkedService": {
 								"referenceName": "staging",
 								"type": "LinkedServiceReference"
